@@ -1,7 +1,10 @@
 import os
 from telegram import Update
-from telegram.ext import Application, MessageHandler, filters, CommandHandler
-from telegram.ext import CallbackContext
+from telegram.ext import Application, MessageHandler, filters, CommandHandler, CallbackContext
+from dotenv import load_dotenv
+
+# بارگذاری متغیرهای محیطی از فایل .env
+load_dotenv()
 
 async def welcome(update: Update, context: CallbackContext):
     # دریافت اطلاعات اعضای جدید
