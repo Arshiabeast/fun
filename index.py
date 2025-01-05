@@ -16,8 +16,7 @@ async def welcome(update: Update, context: CallbackContext):
         await update.message.reply_text(f"Welcome {full_name}! Invite your friends to join us!")
 
 async def start(update: Update, context: CallbackContext):
-    await update.message.reply_text("Hello, I am a bot for welcoming new members in groups.
-I am completely free, and you can add me to your group!")
+    await update.message.reply_text("Hello, I am completely free, and you can add me to your group!")
 
 def main():
     # بارگذاری توکن از متغیر محیطی
