@@ -37,7 +37,7 @@ def main():
     application.add_handler(CommandHandler('start', start))
 
     # اجرای polling برای دریافت پیام‌ها
-    application.run_polling(allowed_updates=Update.ALL)
+    application.run_polling()
 
 # اجرای برنامه
 if __name__ == '__main__':
