@@ -10,8 +10,10 @@ async def welcome(update: Update, context: CallbackContext):
     # دریافت اطلاعات اعضای جدید
     new_members = update.message.new_chat_members
     for member in new_members:
+        # اطمینان از موجود بودن نام کامل کاربر
+        full_name = f"{member.first_name} {member.last_name}" if member.last_name else member.first_name
         # ارسال پیام خوش‌آمدگویی
-        await update.message.reply_text(f"Welcome {member.full_name}! Invite your friends to join us!")
+        await update.message.reply_text(f"Welcome {full_name}! Invite your friends to join us!")
 
 async def start(update: Update, context: CallbackContext):
     await update.message.reply_text("Hello! I will welcome new users in the group.")
@@ -30,7 +32,13 @@ def main():
     # تنظیم handler برای فرمان /start
     application.add_handler(CommandHandler('start', start))
 
-    application.run_polling()
+    # استفاده از webhook
+    application.run_webhook(
+        listen="0.0.0.0",  # برای دسترسی عمومی (مناسب برای Render)
+        port=int(os.getenv("PORT", 8080)),  # از پورت 8080 یا پورت تنظیمی Render استفاده کنید
+        url_path=token,  # مسیر URL برای webhook
+        webhook_url=f"https://your-app-name.onrender.com/{token}"  # URL کامل webhook برای سرویس Render
+    )
 
 if __name__ == '__main__':
     main()
