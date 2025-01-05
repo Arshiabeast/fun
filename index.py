@@ -32,12 +32,15 @@ def main():
     # تنظیم handler برای فرمان /start
     application.add_handler(CommandHandler('start', start))
 
-    # استفاده از webhook
+    # تنظیم وب‌هوک
+    webhook_url = f"https://fun-r5xc.onrender.com/{token}"  # ساخت URL وب‌هوک با استفاده از توکن
+
+    # اجرای webhook
     application.run_webhook(
-        listen="0.0.0.0",  # برای دسترسی عمومی (مناسب برای Render)
-        port=int(os.getenv("PORT", 8080)),  # از پورت 8080 یا پورت تنظیمی Render استفاده کنید
-        url_path=token,  # مسیر URL برای webhook
-        webhook_url=f"https://your-app-name.onrender.com/{token}"  # URL کامل webhook برای سرویس Render
+        listen="0.0.0.0",  # برای دسترسی عمومی
+        port=int(os.getenv("PORT", 8080)),  # پورت پیش‌فرض برای Render
+        url_path=token,  # توکن ربات به عنوان مسیر URL
+        webhook_url=webhook_url  # URL کامل وب‌هوک
     )
 
 if __name__ == '__main__':
